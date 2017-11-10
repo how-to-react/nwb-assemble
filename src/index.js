@@ -1,3 +1,3 @@
-let app = document.querySelector('#app')
+let app = document.querySelector('#app');
 
-app.innerHTML = '<h2>Welcome to nwb-assemble</h2>'
+app.innerHTML = '<h2>Welcome to nwb-assemble!</h2>';
