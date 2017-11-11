@@ -4,22 +4,30 @@
   "description": "Describe nwb-assemble here",
   "private": true,
   "scripts": {
-    "build": "nwb build-web-app && assemble",
+    "build": "npm run build-assets && npm run build-templates",
+    "build-assets": "nwb build-web-app src dist/assets && npm run inject-styles",
+    "build-templates": "assemble --file=assemble.config.js",
+    "inject-styles": "assemble --file=assemble.config.js inject",
     "clean": "nwb clean-app",
-    "start": "nwb serve-web-app --reload",
+    "start": "run-p watch serve",
     "test": "nwb test",
     "test:coverage": "nwb test --coverage",
     "test:watch": "nwb test --server",
-    "serve": "serve dist",
+    "serve": "node live-server.js",
     "watch": "npm-watch"
   },
   "watch": {
-    "build": {
+    "build-templates": {
       "patterns": [
-        "src",
         "src/views"
       ],
-      "extensions": "hbs,json,js,scss"
+      "extensions": "hbs,json"
+    },
+    "build-assets": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "js,scss"
     }
   },
   "devDependencies": {
@@ -28,11 +36,12 @@
     "gulp-inject": "^4.3.0",
     "handlebars-helpers": "^0.9.8",
     "jsonfile": "^4.0.0",
+    "live-server": "^1.2.0",
     "manifest-webpack-plugin": "^0.2.0",
+    "npm-run-all": "^4.1.2",
     "npm-watch": "^0.3.0",
     "nwb": "0.18.x",
     "pretty": "^2.0.0",
-    "serve": "^6.4.1",
     "webpack-manifest-plugin": "^1.3.2"
   },
   "author": "",
