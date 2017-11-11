@@ -1,8 +1,10 @@
 var liveServer = require("live-server");
 var waitOn = require('wait-on');
+var fs = require('fs');
+var packageJson = fs.readFileSync('./package.json');
 
 var params = {
-  port: 5000,
+  port: packageJson.serverPort || 5000,
   root: "dist",
   open: false,
   wait: 200,
